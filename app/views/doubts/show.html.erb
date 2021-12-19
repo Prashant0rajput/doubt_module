@@ -1,0 +1,49 @@
+
+<h2 class="header"><%= @doubt.title %></h2>
+
+<div class="col s12 m7">
+
+  <div class="card horizontal">
+
+    <div class="card-stacked">
+      <div class="card-content">
+        <p id="notice"><%= notice %></p>
+        <p>
+          <strong>Description:</strong>
+          <%= @doubt.description %>
+        </p>
+
+        <p>
+          <strong>Answer:</strong>
+          <%= @doubt.answer %>
+        </p>
+
+
+        <% if current_user.role == 2 %>
+          <div class="waves-effect waves-teal btn-flat"><%= link_to 'Solve', "/doubts/#{@doubt.id}/answer", method: :get %></div>
+        <% end %>
+
+        <div class="waves-effect white btn-flat">
+        <% if current_user.id == @doubt.user_id %>
+          <%= link_to 'Edit', edit_doubt_path(@doubt) %>
+        <% end %>
+          </div>
+
+
+
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<ul class="collection with-header">
+  <li class="collection-header"><h5>Comment</h5></li>
+  <li class="collection-item"> <%= render 'comments/form' %></li>
+</ul>
+
+<div class="collection-item" >
+  <%= render 'comments/comment' %>
+</div>

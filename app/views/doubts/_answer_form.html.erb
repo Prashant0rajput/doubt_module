@@ -1,0 +1,39 @@
+<%= form_with(model: doubt, local: true) do |form| %>
+<!--  <div class="field">-->
+    <%#= form.label :title , :read_only => true %>
+    <%#= form.text_field :title, :read_only => true %>
+<!--  </div>-->
+
+  <div class="field">
+    <%#= form.label :description,:read_only => true %>
+    <%#= form.text_area :description,:read_only => true %>
+    <p>Answer</p>
+    <%= form.text_area :answer %>
+  </div>
+
+  <p>
+    <strong>Title:</strong>
+    <%= @doubt.title %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @doubt.description %>
+  </p>
+  <%= form.hidden_field :solver_id, value: current_user.id %>
+  <%= form.hidden_field :escalator_id, value: current_user.id %>
+
+
+    <input type="submit" class="waves-effect white btn-small" name="commit" value="Answer" data-disable-with="Answer">
+
+
+
+  <div class="waves-effect white btn-small">
+    <% if current_user.role == 2 %>
+      <%= link_to "Escalate", "/doubts/#{@doubt.id}/escalate" , method: :post %>
+    <% end %>
+  </div>
+
+<% end %>
+
+

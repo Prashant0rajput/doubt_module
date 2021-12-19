@@ -1,0 +1,8 @@
+<%= form_for ([@doubt,@comment]) do |f| %>
+
+  <%= f.text_field :comment%>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <div class="waves-effect white btn-flt">
+    <input type="submit" name="commit" value="Add" data-disable-with="Add Comment">
+  </div>
+<% end %>

@@ -1,0 +1,56 @@
+<!--<p id="notice"><%#= notice %></p>-->
+
+
+<h1>Doubts</h1>
+
+<table class="highlight" , id="home">
+
+  <% if current_user.role == 1 %>
+  <%= link_to 'New Doubt', new_doubt_path, class: "waves-effect waves-teal btn-large"%>
+    <% end %>
+  <br>
+  <br>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Comments</th>
+      <th>Escalated</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @doubts.each do |doubt| %>
+      <tr>
+        <td><%= doubt.title %></td>
+        <td><%= doubt.description %></td>
+        <td><%= doubt.comments.count %></td>
+        <% if doubt.status == 3 %>
+          <td>Yes</td>
+        <% else %>
+          <td>No</td>
+        <% end %>
+          <td><%= link_to 'Show', doubt %></td>
+<!--        <td><%#= link_to 'Edit', edit_doubt_path(doubt) %></td>-->
+        <% if current_user.id == doubt.user_id %>
+          <td><%= link_to 'Delete', doubt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+
+        <% if current_user.role == 2 %>
+        <td><%= link_to 'Accept',  "doubts/#{doubt.id}/answer", method: :get, class:"waves-effect red btn" %></td>
+          <% else %>
+        <td></td>
+          <% end %>
+
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

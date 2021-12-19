@@ -1,0 +1,44 @@
+
+
+
+<div class="row">
+  <div class="col s12 m6">
+    <div class="card white darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">Card Title</span>
+        <%= form_with(model: doubt, local: true) do |form| %>
+          <% if doubt.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(doubt.errors.count, "error") %> prohibited this doubt from being saved:</h2>
+
+              <ul>
+                <% doubt.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <%= form.label :title %>
+            <%= form.text_field :title %>
+          </div>
+
+          <div class="field">
+            <%= form.label :description %>
+            <%= form.text_area :description %>
+
+          </div>
+
+          <%= form.hidden_field :user_id, value: current_user.id %>
+
+
+            <input type="submit" name="commit" class= "waves-effect waves-teal btn-large" value="Create" data-disable-with="Create">
+
+
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

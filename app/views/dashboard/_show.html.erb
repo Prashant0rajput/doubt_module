@@ -1,0 +1,31 @@
+
+<h2>Doubts Asked</h2>
+<h3><%= Doubt.all.count %></h3>
+<br>
+<h2>Doubts Resolved</h2>
+<h3><%= Doubt.where('status = 1').count %></h3>
+<br>
+  <h2>Doubts Open</h2>
+<h3><%= Doubt.where('status = 2').count %></h3>
+<br>
+    <h2>Doubts Escalated</h2>
+<h3><%= Doubt.where('status = 3').count %></h3>
+
+<% @tas = User.where('role =2') %>
+
+<% @tas.each do |ta|%>
+  <ul class="collection with-header">
+    <li class="collection-header"><h1>TAs Report</h1></li>
+    <li class="collection-item">
+      <span><%= ta.email %></span>
+      <% @solved = Doubt.where(solver_id: ta.id).count %>
+      <% @escalated = Doubt.where(escalator_id: ta.id).count %>
+     <h2> <span>Doubts Accepted: <%= @solved+@escalated%></span>
+      <span>Doubts Resolved: <%= @solved%></span>
+      <span>Doubts Escalated: <%= @escalated%></span> </h2>
+
+    </li>
+
+  </ul>
+
+<% end %>

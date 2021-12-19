@@ -1,0 +1,13 @@
+<% @comments.each do |c| %>
+
+  <ul class="collection with-header">
+    <li class="collection-header"><h6><%= c.user.email %> </h6></li>
+    <li class="collection-item"><div><%= c.comment %>
+      <% if current_user.id == c.user.id %>
+      <a href="#!" class="secondary-content">
+        <%= link_to "Delete",  doubt_comment_path(c.doubt_id,c.id), method: :delete%>
+      </a></div></li>
+        <% end %>
+  </ul>
+
+<% end %>
